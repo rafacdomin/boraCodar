@@ -5,8 +5,13 @@
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "prettier"
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "settings": {
     "react": {
       "version": "detect"
@@ -23,7 +28,9 @@
       }
     }
   },
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": "error",
     "no-unused-vars": [
       "error",
       {
