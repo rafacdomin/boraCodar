@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { FaForward, FaBackward, FaPause, FaPlay } from 'react-icons/fa';
 import ProgressBar from '../../components/progressBar';
 
-const MusicPlayer = ({ className, src, hideProgress, ...props }) => {
+const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
   const [playing, setPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -72,15 +72,15 @@ const MusicPlayer = ({ className, src, hideProgress, ...props }) => {
 
   return (
     <div className={`flex flex-col bg-purple-950 p-10 rounded-2xl gap-8 text-stone-200 ${className}`} {...props}>
-      <div id="info" className="flex flex-col gap-8">
-        <img src="cover.png" alt="Album Cover" />
-        <div>
-          <h1 className="text-3xl">Acorda Devinho</h1>
-          <p>Banda Rocketseat</p>
+      <div id="info" className={`flex items-center gap-8 ${stack ? 'flex-row' : 'flex-col'}`}>
+        <img src="cover.png" alt="Album Cover" className={`${stack ? 'w-1/4' : 'w-full'}`} />
+        <div className={stack ? '' : 'flex flex-col items-center'}>
+          <h1 className="text-2xl">Acorda Devinho</h1>
+          <p className="text-lg">Banda Rocketseat</p>
         </div>
       </div>
 
-      <div id="controls" className="flex flex-col gap-8">
+      <div id="controls" className={`flex flex-col ${!hideProgress ? 'gap-8' : ''}`}>
         <div className="flex justify-between">
           <FaBackward onClick={previousMusic} title="Previous Music" className="cursor-pointer" />
           {playing ? (

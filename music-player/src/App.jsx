@@ -1,12 +1,16 @@
 import MusicPlayer from './components/musicPlayer';
 
 function App() {
+  const audioFile = 'acorda-pedrinho.mp3';
+
   return (
     <main className="flex items-center justify-center h-screen bg-violet-900">
-      <div className="grid grid-rows-2 grid-cols-2 gap-4">
-        <MusicPlayer className="row-span-2" src="acorda-pedrinho.mp3" />
-        <MusicPlayer className="row-span-2" src="acorda-pedrinho.mp3" hideProgress={true} />
-        {/* <MusicPlayer className="" /> */}
+      <div className="flex gap-4">
+        <MusicPlayer className="" src={audioFile} style={{ minWidth: '40%' }} />
+        <div className="flex flex-col gap-4">
+          <MusicPlayer className="" src={audioFile} stack />
+          <MusicPlayer className="" src={audioFile} hideProgress stack />
+        </div>
       </div>
     </main>
   );
