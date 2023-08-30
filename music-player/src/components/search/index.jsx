@@ -25,12 +25,12 @@ const Search = ({ className, onSearch, onSelect, items, ...props }) => {
   };
 
   return (
-    <div className={`relative text-sm bg-white rounded-md ${className}`} {...props}>
+    <div className={`relative text-sm bg-white rounded-md shadow-xl ${className}`} {...props}>
       <form onFocus={() => setOpen(true)} onBlur={handleBlur} onSubmit={handleSubmit} className="flex items-center">
-        <input className="rounded-md p-2 text-sm w-full" type="search" />
+        <input placeholder="Search for a song or artist" className="rounded-md p-2 text-sm w-full" type="search" />
         <button
           type="submit"
-          className="text-sm px-3 bg-purple-300 h-9 rounded-r-md text-purple-900 hover:bg-purple-400 transition"
+          className="text-sm px-3 bg-indigo-300 h-9 rounded-r-md text-indigo-900 hover:bg-indigo-400 transition"
         >
           <FaSearch />
         </button>
@@ -44,7 +44,7 @@ const Search = ({ className, onSearch, onSelect, items, ...props }) => {
                 onClick={() => handleSelect({ image, name, artist, preview_url })}
                 className="flex items-center gap-2 border-b py-2 text-sm w-full hover:bg-gray-100 transition"
               >
-                <img src={image} alt={`${artist}-${name}`} className="w-16 h-16 bg-green-300" />
+                <img src={image} alt={`${artist}-${name}`} className="rounded-xl w-16 h-16 bg-green-300" />
                 <div className="flex flex-col items-start text-start">
                   <h1>{name}</h1>
                   <p>{artist}</p>

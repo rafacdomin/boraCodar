@@ -52,7 +52,7 @@ function App() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-violet-900">
+    <main className="flex flex-col items-center justify-center h-screen bg-indigo-900">
       <Search className="w-72 lg:w-2/5 mb-10" onSearch={searchMusic} items={tracks} onSelect={selectMusic} />
       <div className="flex gap-4">
         <MusicPlayer data={audioData} style={{ minWidth: '40%' }} />

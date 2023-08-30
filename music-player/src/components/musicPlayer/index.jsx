@@ -84,7 +84,7 @@ const MusicPlayer = ({ className, data, hideProgress, stack, ...props }) => {
 
   return (
     <div
-      className={`flex flex-col bg-purple-950 p-10 rounded-2xl gap-8 text-stone-200 ${className}`}
+      className={`flex flex-col bg-indigo-950 p-10 rounded-2xl gap-8 text-stone-200 shadow-xl ${className}`}
       {...props}
       style={{
         maxWidth: stack ? '500px' : '300px',
@@ -95,8 +95,7 @@ const MusicPlayer = ({ className, data, hideProgress, stack, ...props }) => {
         <img
           src={data.image}
           alt="Album Cover"
-          className={`${stack ? 'w-1/4' : 'w-full'}`}
-          style={{ maxWidth: '180px' }}
+          className={`${stack ? 'w-1/4' : 'w-full'} rounded-xl border-2 border-gray-300`}
         />
         <div className={stack ? '' : 'flex flex-col items-center'}>
           <h1 className="text-xl text-center">{data.name}</h1>
