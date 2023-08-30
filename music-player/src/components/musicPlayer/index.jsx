@@ -97,9 +97,9 @@ const MusicPlayer = ({ className, data, hideProgress, stack, ...props }) => {
           alt="Album Cover"
           className={`${stack ? 'w-1/4' : 'w-full'} rounded-xl border-2 border-gray-300`}
         />
-        <div className={stack ? '' : 'flex flex-col items-center'}>
-          <h1 className="text-xl text-center">{data.name}</h1>
-          <p className="text-lg text-center">{data.artist}</p>
+        <div className={stack ? '' : 'flex flex-col items-center text-center'}>
+          <h1 className="text-xl">{data.name}</h1>
+          <p className="text-lg">{data.artist}</p>
         </div>
       </div>
 
