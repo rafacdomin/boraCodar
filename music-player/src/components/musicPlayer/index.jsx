@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaForward, FaBackward, FaPause, FaPlay } from 'react-icons/fa';
 import ProgressBar from '../../components/progressBar';
 
@@ -76,6 +76,13 @@ const MusicPlayer = ({ className, data, hideProgress, stack, ...props }) => {
     pauseAudio();
   };
 
+  const stopAudio = () => {
+    setCurrentTime(0);
+    audioRef.current.currentTime = 0;
+
+    pauseAudio();
+  };
+
   useEffect(() => {
     previousMusic();
   }, [data]);
@@ -120,7 +127,7 @@ const MusicPlayer = ({ className, data, hideProgress, stack, ...props }) => {
             autoPlay={false}
             src={data.preview_url}
             ref={audioRef}
-            onEnded={pauseAudio}
+            onEnded={stopAudio}
             onLoadedMetadata={() => setDuration(audioRef.current.duration)}
             preload="metadata"
           >
