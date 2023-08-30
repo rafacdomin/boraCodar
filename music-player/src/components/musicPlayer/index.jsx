@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FaForward, FaBackward, FaPause, FaPlay } from 'react-icons/fa';
 import ProgressBar from '../../components/progressBar';
 
-const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
+const MusicPlayer = ({ className, data, hideProgress, stack, ...props }) => {
   const [playing, setPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -34,7 +34,10 @@ const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
   };
 
   const playAudio = () => {
+    setPlaying(true);
     audioRef.current.play();
+
+    clearInterval(intervalId);
 
     setIntervalId(
       setInterval(() => {
@@ -44,6 +47,7 @@ const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
   };
 
   const pauseAudio = () => {
+    setPlaying(false);
     audioRef.current.pause();
 
     clearInterval(intervalId);
@@ -59,6 +63,10 @@ const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
   const previousMusic = () => {
     setCurrentTime(0);
     audioRef.current.currentTime = 0;
+
+    if (playing) {
+      audioRef.current.play();
+    }
   };
 
   const nextMusic = () => {
@@ -68,15 +76,31 @@ const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
     pauseAudio();
   };
 
+  useEffect(() => {
+    previousMusic();
+  }, [data]);
+
   const progress = (currentTime / duration) * 100;
 
   return (
-    <div className={`flex flex-col bg-purple-950 p-10 rounded-2xl gap-8 text-stone-200 ${className}`} {...props}>
+    <div
+      className={`flex flex-col bg-purple-950 p-10 rounded-2xl gap-8 text-stone-200 ${className}`}
+      {...props}
+      style={{
+        maxWidth: stack ? '500px' : '300px',
+        minWidth: stack ? '500px' : '300px',
+      }}
+    >
       <div id="info" className={`flex items-center gap-8 ${stack ? 'flex-row' : 'flex-col'}`}>
-        <img src="cover.png" alt="Album Cover" className={`${stack ? 'w-1/4' : 'w-full'}`} />
+        <img
+          src={data.image}
+          alt="Album Cover"
+          className={`${stack ? 'w-1/4' : 'w-full'}`}
+          style={{ maxWidth: '180px' }}
+        />
         <div className={stack ? '' : 'flex flex-col items-center'}>
-          <h1 className="text-2xl">Acorda Devinho</h1>
-          <p className="text-lg">Banda Rocketseat</p>
+          <h1 className="text-xl text-center">{data.name}</h1>
+          <p className="text-lg text-center">{data.artist}</p>
         </div>
       </div>
 
@@ -95,10 +119,9 @@ const MusicPlayer = ({ className, src, hideProgress, stack, ...props }) => {
           {/* eslint-disable jsx-a11y/media-has-caption */}
           <audio
             autoPlay={false}
-            src={src}
+            src={data.preview_url}
             ref={audioRef}
-            onPlay={() => setPlaying(true)}
-            onPause={() => setPlaying(false)}
+            onEnded={pauseAudio}
             onLoadedMetadata={() => setDuration(audioRef.current.duration)}
             preload="metadata"
           >

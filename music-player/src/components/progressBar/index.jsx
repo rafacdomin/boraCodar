@@ -6,7 +6,7 @@ const ProgressBar = ({ value = 0, onClick }) => {
   const handleClick = (clickEvent) => {
     const { offsetLeft, clientWidth } = buttonRef.current;
 
-    const newValue = ((clickEvent.screenX - offsetLeft) / clientWidth) * 100;
+    const newValue = ((clickEvent.clientX - offsetLeft) / clientWidth) * 100;
 
     onClick(newValue);
   };
